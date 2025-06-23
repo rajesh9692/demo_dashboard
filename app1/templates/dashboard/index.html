@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Dashboard</title>
+  <link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="main">
+    <div class="header">Dashboard</div>
+    <div class="contracts-header">
+    <h4>Add Contracts</h4>
+    </div>
+
+  <form class="inline-form" onsubmit="event.preventDefault(); postContract();">
+    <input id="serial" placeholder="Serial" required>
+    <input id="name" placeholder="Name" required>
+    <input id="value" type="number" placeholder="Value" required>
+
+  <select id="status" required>
+    <option value="">Select Status</option>
+    <option value="Active">Active</option>
+    <option value="Draft">Draft</option>
+    <option value="In Review">In Review</option>
+  </select>
+
+  <select id="type" required>
+    <option value="">Select Type</option>
+    <option value="NDA">NDA</option>
+    <option value="Insurance">Insurance</option>
+    <option value="Lease">Lease</option>
+    <option value="Maintenance">Maintenance</option>
+    <option value="Purchase Agreement">Purchase Agreement</option>
+    <option value="Sale">Sale</option>
+  </select>
+
+
+  <input id="expiry_date" type="date" required>
+  <button type="submit">Add Contract</button>
+</form>
+
+    
+
+
+
+    <!-- <div class="stats">
+      <div class="stat-box"><h3>Accepted</h3><p id="accepted-count">0</p></div>
+      <div class="stat-box"><h3>In Contract</h3><p id="in-contract-count">0</p></div>
+      <div class="stat-box"><h3>In Approval</h3><p id="in-approval-count">0</p></div>
+    </div> -->
+
+    <div class="charts">
+      <div class="chart-box"><h4>Contract by Stages</h4><canvas id="barChart"></canvas></div>
+      <div class="chart-box"><h4>Contract Expiring</h4><canvas id="expiryPieChart"></canvas></div>
+      <div class="chart-box"><h4>Contract by Type</h4><canvas id="typeChart"></canvas></div>
+    </div>
+
+    <div class="contracts-table">
+      <h4>My Contracts</h4>
+      <table>
+        <thead>
+          <tr><th>Serial #</th><th>Name</th><th>Value</th><th>Status</th></tr>
+        </thead>
+        <tbody id="contract-table-body"></tbody>
+      </table>
+    </div>
+
+    <div class="cycle-time">
+      <h4>Average Cycle Time</h4>
+      <div id="cycle-time-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;"></div>
+    </div>
+  </div>
+
+  <script src="{% static 'dashboard/script.js' %}"></script>
+
+</body>
+</html>
