@@ -18,12 +18,13 @@
   <form class="inline-form" onsubmit="event.preventDefault(); postContract();">
     <input id="serial" placeholder="Serial" required>
     <input id="name" placeholder="Name" required>
-    <input id="value" type="number" placeholder="Value" required>
+    <input id="value" type="number" step="any" placeholder="Value" required>
 
   <select id="status" required>
     <option value="">Select Status</option>
     <option value="Active">Active</option>
     <option value="Draft">Draft</option>
+    <option value="Cancel">Cancel</option>
     <option value="In Review">In Review</option>
   </select>
 
@@ -53,9 +54,15 @@
     </div> -->
 
     <div class="charts">
-      <div class="chart-box"><h4>Contract by Stages</h4><canvas id="barChart"></canvas></div>
+      <div class="chart-box">
+        <h4>Contract by Stages</h4>
+        <canvas id="barChart"></canvas>
+      </div>
       <div class="chart-box"><h4>Contract Expiring</h4><canvas id="expiryPieChart"></canvas></div>
-      <div class="chart-box"><h4>Contract by Type</h4><canvas id="typeChart"></canvas></div>
+      <div class="chart-box">
+        <h4>Contract by Type</h4>
+        <canvas id="typeChart"></canvas>
+      </div>
     </div>
 
     <div class="contracts-table">

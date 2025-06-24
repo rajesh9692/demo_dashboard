@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 import json
 from datetime import date
-
+from decimal import Decimal
 
 
 
@@ -29,32 +29,37 @@ def add_contract(request):
         try:
             data = json.loads(request.body)
 
-            # Create and save contract
-            contract = Contract.objects.create(
+            # Convert float or string to Decimal
+            raw_value = data.get('value')
+            if raw_value is None:
+                return JsonResponse({'error': 'Value is required'}, status=400)
+
+            value = Decimal(str(raw_value))  # ✅ Critical conversion
+
+            Contract.objects.create(
                 serial=data.get('serial'),
                 name=data.get('name'),
-                value=data.get('value'),
+                value=value,
                 status=data.get('status'),
-                type=data.get('type', ''),  # optional
-                expiry_date=data.get('expiry_date')  # optional
+                type=data.get('type'),
+                expiry_date=data.get('expiry_date')
             )
 
-            return JsonResponse({'message': '✅ Contract added successfully!'})
-
+            return JsonResponse({'message': 'Contract added successfully!'})
         except Exception as e:
-            print("❌ Error while saving contract:", e)
-            return JsonResponse({'error': '❌ Failed to save contract'}, status=500)
-
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+            return JsonResponse({'error': str(e)}, status=400)
 
 
 
 @csrf_exempt
 def get_contracts(request):
     if request.method == 'GET':
-        contracts = Contract.objects.all().values('serial', 'name', 'value', 'status')
+        contracts = (
+            Contract.objects.all()
+            .order_by('-id')[:7]  # ✅ Most recent 7 entries
+            .values('serial', 'name', 'value', 'status')
+        )
         return JsonResponse(list(contracts), safe=False)
-
 
 
 @csrf_exempt

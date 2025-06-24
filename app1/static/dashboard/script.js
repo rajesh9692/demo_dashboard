@@ -34,7 +34,8 @@ function postContract() {
   .then(response => response.json())
   .then(data => {
     alert(data.message || '✅ Contract added successfully!');
-    document.querySelector('form').reset(); // Optional: reset form
+    document.querySelector('form').reset();
+    fetchContracts();
   })
   .catch(error => {
     console.error('Error:', error);
@@ -43,32 +44,31 @@ function postContract() {
 }
 
 
-function loadRecentContracts() {
-  fetch('/contracts/get/')  // Adjust URL if different
+function fetchContracts() {
+  fetch('/contracts/get/')
     .then(response => response.json())
     .then(data => {
       const tableBody = document.getElementById('contract-table-body');
-      tableBody.innerHTML = ''; // Clear old rows
+      tableBody.innerHTML = '';
 
-      data.forEach(contract => {
+      data.forEach((contract, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
+          <td>${index + 1}</td>
           <td>${contract.serial}</td>
           <td>${contract.name}</td>
           <td>${contract.value}</td>
           <td>${contract.status}</td>
         `;
-        tableBody.appendChild(row); // Adds in top-down order
+        tableBody.appendChild(row);
       });
     })
-    .catch(error => {
-      console.error('Error loading contracts:', error);
-      alert('Failed to load contract data.');
-    });
+    .catch(error => console.error('Error fetching contracts:', error));
 }
 
-// Call on page load
-document.addEventListener('DOMContentLoaded', loadRecentContracts);
+// Load data when page loads
+document.addEventListener('DOMContentLoaded', fetchContracts);
+
 
 
 // GET contract list
