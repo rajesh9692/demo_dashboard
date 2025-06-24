@@ -49,34 +49,6 @@ body {
   background-color: #2980b9;
 }
 
-/* NEW for expiry_date */
-/* .date-wrapper {
-  position: relative;
-  flex: 1;
-  min-width: 140px;
-}
-
-.date-wrapper input[type="date"] {
-  width: 100%;
-  padding-right: 30px;
-  padding-left: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  height: 38px;
-  font-size: 14px;
-}
-
-.date-wrapper .calendar-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #888;
-  font-size: 16px;
-} */
-
-
 
 
 /* ==== CHARTS ==== */
@@ -187,4 +159,34 @@ body {
 .bar span.label {
   margin-top: 5px;
   font-size: 14px;
+}
+
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  min-width: 80px;
+}
+
+/* Status-specific colors */
+.status-badge.active {
+  background-color: #2ecc71; /* Green */
+}
+
+.status-badge.draft {
+  background-color: #f1c40f; /* Yellow */
+  color: black;
+}
+
+.status-badge.cancel {
+  background-color: #e74c3c; /* Red */
+}
+
+.status-badge.in-review {
+  background-color: #3498db; /* Blue */
 }

@@ -42,26 +42,17 @@
   <input id="expiry_date" type="date" required>
   <button type="submit">Add Contract</button>
 </form>
-
-    
-
-
-
-    <!-- <div class="stats">
-      <div class="stat-box"><h3>Accepted</h3><p id="accepted-count">0</p></div>
-      <div class="stat-box"><h3>In Contract</h3><p id="in-contract-count">0</p></div>
-      <div class="stat-box"><h3>In Approval</h3><p id="in-approval-count">0</p></div>
-    </div> -->
-
     <div class="charts">
       <div class="chart-box">
         <h4>Contract by Stages</h4>
-        <canvas id="barChart"></canvas>
+        <canvas id="barChart" style="margin-top: 140px;"></canvas>
+        <!-- <canvas id="barChart"></canvas> -->
       </div>
       <div class="chart-box"><h4>Contract Expiring</h4><canvas id="expiryPieChart"></canvas></div>
       <div class="chart-box">
         <h4>Contract by Type</h4>
-        <canvas id="typeChart"></canvas>
+        <canvas id="typeChart" style="margin-top: 140px;"></canvas>
+        <!-- <canvas id="typeChart"></canvas> -->
       </div>
     </div>
 
@@ -69,7 +60,12 @@
       <h4>My Contracts</h4>
       <table>
         <thead>
-          <tr><th>Serial #</th><th>Name</th><th>Value</th><th>Status</th></tr>
+          <tr>
+            <th>Serial #</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody id="contract-table-body"></tbody>
       </table>

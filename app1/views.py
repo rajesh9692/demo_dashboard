@@ -8,13 +8,9 @@ from decimal import Decimal
 
 
 
-
-
-
 def dashboard_view(request):
     contracts = Contract.objects.all().order_by('-id')  # latest first
     return render(request, 'dashboard/index.html', {'contracts': contracts})
-
 
 
 
@@ -93,7 +89,6 @@ def contract_expiry_summary(request):
         '>30 Days': over_30
     }
     return JsonResponse(data)
-
 
 
 

@@ -52,13 +52,14 @@ function fetchContracts() {
       tableBody.innerHTML = '';
 
       data.forEach((contract, index) => {
+        const statusClass = contract.status.toLowerCase().replace(/\s+/g, '-');
+
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${contract.serial}</td>
           <td>${contract.name}</td>
-          <td>${contract.value}</td>
-          <td>${contract.status}</td>
+          <td><span class="status-badge ${statusClass}">${contract.status}</span></td>
         `;
         tableBody.appendChild(row);
       });
